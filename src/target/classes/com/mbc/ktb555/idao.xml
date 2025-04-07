@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.ktb555.Service">
+ 
+ <insert id="insertb">
+ 	insert into book0320 values(book0320_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},0)
+ </insert>
+  
+  
+  <select id="selectb" resultType="com.mbc.ktb555.BookDTO">
+  select * from book0320
+  
+  </select>
+  
+  <update id="countup">
+	update book0320 set bcnt=bcnt+1 where bnumber=#{param1}  
+  </update>
+  
+  <select id="cnt" resultType="com.mbc.ktb555.BookDTO">
+  select * from book0320 where bnumber=#{param1}
+  </select>
+  
+  <select id="update" resultType="com.mbc.ktb555.BookDTO">
+  select * from book0320 where bnumber=#{param1}
+  </select>
+  <update id="updatego">
+  update book0320 set bname=#{param1},name=#{param2},bdate=#{param3},bprice=#{param4},bimage=#{param5},bcnt=#{param6} where bnumber=#{param7}
+
+  </update>
+  </mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.ktb555.Service">
+
+  <insert id="insertb">
+    insert into book0320 values(book0320_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},0)
+  </insert>
+
+  <select id="selectb" resultType="com.mbc.ktb555.BookDTO">
+    select bname, name, bdate, bprice, bimage, bcnt, bnumber, groups, step, indent 
+    from book0320
+  </select>
+
+  <update id="countup">
+    update book0320 set bcnt=bcnt+1 where bnumber=#{param1}
+  </update>
+
+  <select id="cnt" resultType="com.mbc.ktb555.BookDTO">
+    select * from book0320 where bnumber=#{param1}
+  </select>
+
+  <select id="update" resultType="com.mbc.ktb555.BookDTO">
+    select * from book0320 where bnumber=#{param1}
+  </select>
+
+  <update id="updatego">
+    update book0320 
+    set bname=#{param1}, name=#{param2}, bdate=#{param3}, bprice=#{param4}, bimage=#{param5}, 
+        bcnt=#{param6}, groups=#{param7}, step=#{param8}, indent=#{param9} 
+    where bnumber=#{param10}
+  </update>
+
+  <!-- 페이징처리에서 전체레코드수 구하기 -->
+  <select id="total" resultType="int">
+    select count(*) from book0320
+  </select>
+
+  <select id="page" resultType="com.mbc.ktb555.BookDTO">
+    select * from (
+      select rownum rn, A.* from (
+        select bnumber, bname, name,to_char(bdate, 'yyyy-MM-dd')bdate, bprice,bimage ,bcnt , groups, step, indent 
+        from book0320 order by groups DESC, step asc
+      ) A
+    )
+    where rn between #{start} AND #{end}
+  </select>
+
+</mapper>
